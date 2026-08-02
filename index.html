@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Night, Neha 🌙</title>
+    <!-- Modern Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Canvas for floating heart particles -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Starfield container for dynamically generated stars -->
+    <div id="starfield"></div>
+
+    <!-- Parallax/Background elements -->
+    <div class="moon">
+        <div class="moon-glow"></div>
+    </div>
+    
+    <div class="ambient-fog"></div>
+
+    <!-- Main Interactive Area -->
+    <div class="app-container">
+        <!-- Soundbox Control -->
+        <button id="music-toggle" class="music-btn" aria-label="Toggle Music Box">
+            <span class="music-icon">🎵</span>
+            <span class="music-text">Lullaby Off</span>
+        </button>
+
+        <!-- Dynamic Message Bubble (When clicking stars) -->
+        <div id="star-message" class="star-message-bubble">
+            Click on a glowing star to find a sweet thought...
+        </div>
+
+        <!-- The Interactive Envelope -->
+        <div class="envelope-wrapper">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <!-- The Letter inside the envelope -->
+                <div class="letter">
+                    <div class="letter-content">
+                        <h2 class="letter-title">Good Night, Neha ❤️</h2>
+                        <div class="letter-divider"></div>
+                        <p class="letter-body">
+                            As the night settles in and the world grows quiet, I find my thoughts drifting to you. You make every single day brighter, and tonight, I wanted to send a little piece of that warmth back to you.
+                        </p>
+                        <p class="letter-body">
+                            Thank you for being your wonderful, amazing self. May your sleep be peaceful and your dreams filled with happy thoughts. 
+                        </p>
+                        <p class="letter-signature">
+                            Always, <br>
+                            <span class="signature-name">Priyansh</span>
+                        </p>
+                    </div>
+                </div>
+                <!-- The interactive heart wax seal -->
+                <div class="seal" id="envelope-seal">
+                    <svg class="heart-svg" viewBox="0 0 32 32">
+                        <path d="M16,28.261c-0.342,0-0.676-0.125-0.938-0.352c-0.273-0.237-7.447-6.529-10.457-9.539C2.47,16.233,1,13.676,1,10.66 C1,5.334,5.334,1,10.66,1c3.016,0,5.573,1.47,7.34,3.605C19.767,2.47,22.324,1,25.34,1C30.666,1,35,5.334,35,10.66 c0,3.016-1.47,5.573-3.605,7.34c-3.01,3.01-10.184,9.302-10.457,9.539C20.676,28.136,20.342,28.261,16,28.261z"/>
+                    </svg>
+                    <span class="seal-prompt">Tap to Open</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Make a Wish Panel -->
+        <div class="wish-panel">
+            <p>Make a wish on a shooting star...</p>
+            <div class="wish-input-container">
+                <input type="text" id="wish-input" placeholder="Type your wish here..." maxlength="50">
+                <button id="wish-btn">Send Wish ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sound Indicator (Popup modal for first sound activation instruction) -->
+    <div id="sound-modal" class="modal">
+        <div class="modal-content">
+            <h3>🎵 Play a Lullaby?</h3>
+            <p>Would you like to turn on a gentle music box lullaby while you read?</p>
+            <div class="modal-actions">
+                <button id="modal-yes" class="btn-modal btn-primary">Yes, please</button>
+                <button id="modal-no" class="btn-modal">No, thanks</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
