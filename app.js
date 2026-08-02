@@ -1,6 +1,6 @@
 // CONFIGURATION
 // To receive Neha's wishes directly in your email, get a free Access Key from https://web3forms.com/
-// and paste it below. (It's free, instant, and requires no registration/account creation!).
+// and paste it below. (It's free, instant, and requires no registration/account creation!). test
 const WEB3FORMS_ACCESS_KEY = "ac0eed25-47fa-466a-a1d0-f24b8da3a7c7";
 
 document.addEventListener('DOMContentLoaded', () => {
