@@ -1,12 +1,5 @@
 // --- Good Night Lock for Neha Script ---
-
-// -------------------------------------------------------------
-// 📲 YOUR WHATSAPP NUMBER CONFIGURATION
-// Replace "91XXXXXXXXXX" below with your full phone number including country code (without + or spaces, e.g. "919876543210")
-// Or pass it in URL like: https://yourpage.com/?phone=919876543210
-// -------------------------------------------------------------
-const urlParams = new URLSearchParams(window.location.search);
-let targetPhone = urlParams.get('phone') || "91XXXXXXXXXX"; 
+// Created with love by Priyansh ❤️
 
 let selectedPhotoDataUrl = null;
 let webcamStream = null;
@@ -47,7 +40,6 @@ const sendKissBtn = document.getElementById('sendKissBtn');
 const musicToggleBtn = document.getElementById('musicToggleBtn');
 const musicIcon = document.getElementById('musicIcon');
 const musicText = document.getElementById('musicText');
-const whatsappShareBtn = document.getElementById('whatsappShareBtn');
 
 // Playful warning messages list
 const warningList = [
@@ -202,45 +194,9 @@ function unlockGoodNightView() {
 
   // Play subtle chime sound
   playChimeSound();
-  
-  // Strictly no automatic redirects!
 }
 
-// --- 4. MANUAL WHATSAPP REDIRECTION (ONLY RUNS ON BUTTON TAP) ---
-function openDirectWhatsAppLink() {
-  const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-  const textMsg = encodeURIComponent("Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨");
-  
-  let targetUrl = `https://api.whatsapp.com/send?text=${textMsg}`;
-  if (cleanPhone && cleanPhone !== "91XXXXXXXXXX") {
-    targetUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textMsg}`;
-  }
-  
-  window.open(targetUrl, '_blank');
-}
-
-whatsappShareBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  if (navigator.share && selectedPhotoDataUrl) {
-    fetch(selectedPhotoDataUrl)
-      .then(res => res.blob())
-      .then(blob => {
-        const file = new File([blob], 'neha_cute_selfie.jpg', { type: 'image/jpeg' });
-        navigator.share({
-          title: 'Neha\'s Cute Selfie for Priyansh 📸',
-          text: 'Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨',
-          files: [file]
-        }).catch(() => {
-          openDirectWhatsAppLink();
-        });
-      })
-      .catch(() => openDirectWhatsAppLink());
-  } else {
-    openDirectWhatsAppLink();
-  }
-});
-
-// --- 5. INTERACTIVE LOVE CARDS ---
+// --- 4. INTERACTIVE LOVE CARDS ---
 function toggleCard(cardElement) {
   const front = cardElement.querySelector('.card-front');
   const back = cardElement.querySelector('.card-back');
@@ -256,7 +212,7 @@ function toggleCard(cardElement) {
   }
 }
 
-// --- 6. VIRTUAL KISS COUNTER ---
+// --- 5. VIRTUAL KISS COUNTER ---
 sendKissBtn.addEventListener('click', (e) => {
   kissCount++;
   kissCounter.innerText = kissCount;
@@ -278,7 +234,7 @@ sendKissBtn.addEventListener('click', (e) => {
   }, 1500);
 });
 
-// --- 7. BACKGROUND STARRY CANVAS ---
+// --- 6. BACKGROUND STARRY CANVAS ---
 const starCanvas = document.getElementById('starCanvas');
 const starCtx = starCanvas.getContext('2d');
 let stars = [];
@@ -322,7 +278,7 @@ window.addEventListener('resize', resizeStarCanvas);
 resizeStarCanvas();
 drawStars();
 
-// --- 8. FLOATING HEART CANVAS (UNLOCKED VIEW) ---
+// --- 7. FLOATING HEART CANVAS (UNLOCKED VIEW) ---
 let hearts = [];
 function initHeartCanvas() {
   const heartCanvas = document.getElementById('heartCanvas');
@@ -359,7 +315,7 @@ function initHeartCanvas() {
   renderHearts();
 }
 
-// --- 9. AUDIO LULLABY SYNTHESIZER ---
+// --- 8. AUDIO LULLABY SYNTHESIZER ---
 musicToggleBtn.addEventListener('click', () => {
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
