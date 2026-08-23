@@ -203,13 +203,24 @@ function unlockGoodNightView() {
   // Play subtle chime sound
   playChimeSound();
   
-  // NOTE: No automatic WhatsApp redirect here! 
-  // Neha decides when to click the green button to send her selfie to Priyansh.
+  // Strictly no automatic redirects!
 }
 
-// --- 4. MANUAL WHATSAPP REDIRECTION (TRIGGERED ONLY ON BUTTON CLICK) ---
-function redirectToWhatsApp() {
-  // Mobile Web Share API to directly attach image file into WhatsApp if supported on phone
+// --- 4. MANUAL WHATSAPP REDIRECTION (ONLY RUNS ON BUTTON TAP) ---
+function openDirectWhatsAppLink() {
+  const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
+  const textMsg = encodeURIComponent("Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨");
+  
+  let targetUrl = `https://api.whatsapp.com/send?text=${textMsg}`;
+  if (cleanPhone && cleanPhone !== "91XXXXXXXXXX") {
+    targetUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textMsg}`;
+  }
+  
+  window.open(targetUrl, '_blank');
+}
+
+whatsappShareBtn.addEventListener('click', (e) => {
+  e.preventDefault();
   if (navigator.share && selectedPhotoDataUrl) {
     fetch(selectedPhotoDataUrl)
       .then(res => res.blob())
@@ -220,7 +231,6 @@ function redirectToWhatsApp() {
           text: 'Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨',
           files: [file]
         }).catch(() => {
-          // Fallback to direct wa.me link if Web Share fails or is closed
           openDirectWhatsAppLink();
         });
       })
@@ -228,23 +238,6 @@ function redirectToWhatsApp() {
   } else {
     openDirectWhatsAppLink();
   }
-}
-
-function openDirectWhatsAppLink() {
-  const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-  const textMsg = encodeURIComponent("Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨");
-  
-  if (cleanPhone && cleanPhone !== "91XXXXXXXXXX") {
-    // Uses whatsapp:// deep link or api.whatsapp.com to trigger WhatsApp app on phone
-    window.location.href = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${textMsg}`;
-  } else {
-    // Opens WhatsApp share menu
-    window.location.href = `https://api.whatsapp.com/send?text=${textMsg}`;
-  }
-}
-
-whatsappShareBtn.addEventListener('click', () => {
-  redirectToWhatsApp();
 });
 
 // --- 5. INTERACTIVE LOVE CARDS ---
