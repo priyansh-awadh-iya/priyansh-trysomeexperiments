@@ -13,7 +13,7 @@
   <!-- FontAwesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=4.0">
+  <link rel="stylesheet" href="styles.css?v=5.0">
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-pink-500 selection:text-white relative overflow-x-hidden">
 
@@ -64,7 +64,7 @@
           <i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Verification Required:
         </h3>
         <p class="text-xs text-slate-300 leading-relaxed">
-          You must upload or take <strong>1 cute picture</strong> of yourself to unlock your personalized Good Night note & sweet dreams package!
+          You must share <strong>1 sweet photo</strong> of yourself to unlock your personalized Good Night note from Priyansh & sweet dreams package!
         </p>
       </div>
 
@@ -80,7 +80,7 @@
             </button>
           </div>
           <div class="absolute top-2 right-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
-            <i class="fa-solid fa-check"></i> Cute Pic Ready
+            <i class="fa-solid fa-check"></i> Photo Ready
           </div>
         </div>
 
@@ -91,7 +91,7 @@
             <i class="fa-solid fa-cloud-arrow-up"></i>
           </div>
           <p class="text-slate-200 text-sm font-medium mb-1">
-            Tap to upload cute photo
+            Tap to upload your sweet photo
           </p>
           <p class="text-slate-400 text-xs">
             PNG, JPG, WEBP or phone gallery
@@ -114,7 +114,7 @@
       <!-- Camera Modal (Hidden by default) -->
       <div id="cameraModal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-4 text-center">
-          <h3 class="text-slate-200 font-semibold text-lg mb-3">Snap a Cute Selfie 📸</h3>
+          <h3 class="text-slate-200 font-semibold text-lg mb-3">Snap a Sweet Selfie 📸</h3>
           <div class="relative rounded-2xl overflow-hidden bg-black aspect-3/4 mb-4">
             <video id="webcam" autoplay playsinline class="w-full h-full object-cover transform -scale-x-100"></video>
             <canvas id="photoCanvas" class="hidden"></canvas>
@@ -139,17 +139,17 @@
       <!-- Warning Toast/Popup container -->
       <div id="warningPopup" class="hidden mt-4 bg-rose-500/20 border border-rose-500/50 text-rose-200 text-xs font-semibold px-4 py-3 rounded-xl animate-bounce flex items-center gap-2">
         <i class="fa-solid fa-circle-exclamation text-rose-400 text-base"></i>
-        <span id="warningMessage">Hey! You haven't attached a cute picture yet! 😜</span>
+        <span id="warningMessage">Hey! You haven't attached your sweet picture yet! 😜</span>
       </div>
 
     </div>
 
 
-    <!-- CONTAINER 2: CUTENESS SCANNER MODAL (Hidden initially) -->
+    <!-- CONTAINER 2: PERSONALITY SCANNER MODAL (Hidden initially) -->
     <div id="scannerModal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-lg flex items-center justify-center p-4">
       <div class="bg-slate-900/90 border border-pink-500/40 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center relative overflow-hidden shadow-2xl">
         
-        <h3 class="text-xl font-bold text-pink-300 mb-4">Cuteness Scanner v3.0 🔬</h3>
+        <h3 class="text-xl font-bold text-pink-300 mb-4">Warm Heart & Soul Scanner 🔬</h3>
 
         <!-- Scanner Image Box with Animated Laser Bar -->
         <div class="relative rounded-2xl overflow-hidden border-2 border-pink-500/50 mb-6 mx-auto w-48 h-48 shadow-lg">
@@ -163,11 +163,11 @@
           <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
             <div id="scanProgressBar" class="h-full bg-gradient-to-r from-pink-500 to-purple-500 w-0 transition-all duration-300"></div>
           </div>
-          <p id="scanStatusText" class="text-xs text-pink-300 font-mono tracking-wider">Initializing facial cuteness scan...</p>
+          <p id="scanStatusText" class="text-xs text-pink-300 font-mono tracking-wider">Initializing personality & warmth scan...</p>
         </div>
 
-        <div id="scanResultBadge" class="hidden text-emerald-400 font-extrabold text-lg animate-pulse">
-          🎉 CUTENESS RATING: 10,000 / 10!
+        <div id="scanResultBadge" class="hidden text-emerald-400 font-extrabold text-base sm:text-lg animate-pulse">
+          🎉 WONDERFUL SOUL: 10,000 / 10!
         </div>
 
       </div>
@@ -191,19 +191,19 @@
           Good Night, Neha! 💖✨
         </h1>
         <p class="font-handwriting text-pink-300 text-lg sm:text-xl mb-6">
-          "The stars are shining, but none as bright as you..."
+          "The stars are shining, but your kindness & warmth outshine them all..."
         </p>
 
         <!-- Polaroid Frame displaying her photo -->
         <div class="polaroid-frame bg-white p-4 pb-6 rounded-lg shadow-2xl max-w-xs mx-auto mb-6 transform -rotate-2 hover:rotate-0 transition-transform duration-300 relative group">
           <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-200/80 w-24 h-6 transform -rotate-1 shadow-sm pointer-events-none"></div>
-          <img id="unlockedUserPhoto" src="" alt="Cutest Neha" class="w-full h-64 object-cover rounded shadow-inner mb-3">
+          <img id="unlockedUserPhoto" src="" alt="Sweetest Neha" class="w-full h-64 object-cover rounded shadow-inner mb-3">
           <p class="font-handwriting text-slate-800 text-xl font-bold tracking-wide">
-            Cutest Girl Alive 👑💕
+            Most Amazing & Kind Soul 👑💕
           </p>
         </div>
 
-        <!-- CUTE MANUALLY REMINDER CARD (No buttons or redirects) -->
+        <!-- CUTE MANUALLY REMINDER CARD -->
         <div class="bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4 mb-8 text-left relative overflow-hidden shadow-lg">
           <div class="flex items-start gap-3">
             <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl shrink-0 mt-0.5">
@@ -214,22 +214,22 @@
                 <span>Sweet Reminder for Neha!</span> 📲✨
               </h4>
               <p class="text-xs text-slate-300 leading-relaxed">
-                P.S. Don't forget to send this cute selfie to <strong>Priyansh</strong> on WhatsApp manually! He is waiting to see your beautiful picture ❤️
+                P.S. Don't forget to send this sweet selfie to <strong>Priyansh</strong> on WhatsApp manually! He is waiting to talk to the most wonderful girl ❤️
               </p>
             </div>
           </div>
         </div>
 
-        <!-- Romantic Good Night Letter with Priyansh's Signature -->
+        <!-- Romantic Good Night Letter focused on personality -->
         <div class="bg-gradient-to-b from-pink-950/40 to-purple-950/40 border border-pink-500/30 rounded-2xl p-6 text-left mb-8 space-y-4 leading-relaxed text-slate-200 text-sm sm:text-base relative shadow-inner">
           <p class="font-semibold text-pink-300 text-lg">
             Dearest Neha,
           </p>
           <p>
-            Thank you for making my whole world warmer and happier just by being in it. Looking at your cute photo right now makes me smile so much! 😊
+            Thank you for making my whole world warmer, brighter, and happier just by being your wonderful self. Your kindness, your sweet laugh, and the incredible person you are inside make me admire you more every day! 😊
           </p>
           <p>
-            As you wrap yourself in your cozy blanket tonight, I want you to remember how incredibly special, gorgeous, and loved you are. May your sleep be peaceful and your dreams full of sweet moments (and maybe a little bit of me! 😜).
+            As you wrap yourself in your cozy blanket tonight, I want you to remember how deeply appreciated, special, and loved you are for the beautiful soul you have. May your sleep be peaceful and your dreams full of sweet, happy moments.
           </p>
           <div class="text-right pt-2 border-t border-pink-500/20">
             <p class="font-handwriting text-pink-300 text-2xl font-bold">
@@ -241,7 +241,7 @@
           </div>
         </div>
 
-        <!-- Interactive Love Notes Cards Section -->
+        <!-- Interactive Love Notes Cards Section focused on personality -->
         <div class="mb-8">
           <h3 class="text-slate-300 font-semibold text-sm mb-3 flex items-center justify-center gap-2">
             <i class="fa-solid fa-envelope-open-text text-pink-400"></i> Tap cards to reveal midnight love notes from Priyansh:
@@ -254,7 +254,7 @@
                 <i class="fa-solid fa-star text-amber-300 mb-1 block"></i> Secret Note #1
               </div>
               <div class="card-back hidden text-xs text-slate-200 font-medium">
-                "Your smile brightens even my darkest days! ✨"
+                "Your kindness and beautiful heart brighten even my darkest days! ✨"
               </div>
             </div>
             
@@ -264,7 +264,7 @@
                 <i class="fa-solid fa-heart text-rose-400 mb-1 block"></i> Secret Note #2
               </div>
               <div class="card-back hidden text-xs text-slate-200 font-medium">
-                "I fall in love with you a little more every day 💕"
+                "I admire your sweet personality, intelligence, and warmth every single day 💕"
               </div>
             </div>
 
@@ -274,7 +274,7 @@
                 <i class="fa-solid fa-moon text-purple-300 mb-1 block"></i> Secret Note #3
               </div>
               <div class="card-back hidden text-xs text-slate-200 font-medium">
-                "Sending you a warm hug through the screen! 🫂"
+                "Your gentle nature makes everyone around you feel so happy and cared for! 🫂"
               </div>
             </div>
           </div>
@@ -300,7 +300,7 @@
 
   </main>
 
-  <!-- Clean Script (No WhatsApp redirects) -->
-  <script src="script.js?v=4.0"></script>
+  <!-- Cache-Busted Script -->
+  <script src="script.js?v=5.0"></script>
 </body>
 </html>

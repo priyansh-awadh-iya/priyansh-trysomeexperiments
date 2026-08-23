@@ -41,12 +41,12 @@ const musicToggleBtn = document.getElementById('musicToggleBtn');
 const musicIcon = document.getElementById('musicIcon');
 const musicText = document.getElementById('musicText');
 
-// Playful warning messages list
+// Playful warning messages list focused on personality and warmth
 const warningList = [
-  "Hold on Neha! 🛑 No cute picture, no Good Night wish! Upload a selfie first! 📸",
-  "Nice try sneaky! 😜 System requires 1 cute photo to proceed!",
+  "Hold on Neha! 🛑 No photo attached yet! Upload a sweet selfie first! 📸",
+  "Nice try sneaky! 😜 System requires 1 sweet picture to proceed!",
   "Good Night wish from Priyansh is strictly locked! 🔒 Please attach a pic ❤️",
-  "0% Cuteness detected in upload box! Send a pic to verify! 💕",
+  "0% Warmth detected in upload box! Send a pic to verify! 💕",
   "Come on Neha! Don't try to cheat the lock! 📸✨"
 ];
 
@@ -135,7 +135,7 @@ captureBtn.addEventListener('click', () => {
   stopWebcam();
 });
 
-// --- 3. UNLOCK & SCANNER LOGIC ---
+// --- 3. UNLOCK & PERSONALITY SCANNER LOGIC ---
 unlockBtn.addEventListener('click', () => {
   if (!selectedPhotoDataUrl) {
     // Show playful warning and shake card
@@ -156,7 +156,7 @@ unlockBtn.addEventListener('click', () => {
 function startCutenessScan() {
   scannerImg.src = selectedPhotoDataUrl;
   scanProgressBar.style.width = '0%';
-  scanStatusText.innerText = "Initializing facial cuteness scan...";
+  scanStatusText.innerText = "Initializing personality & warmth scan...";
   scanResultBadge.classList.add('hidden');
   scannerModal.classList.remove('hidden');
 
@@ -166,11 +166,11 @@ function startCutenessScan() {
     scanProgressBar.style.width = progress + '%';
 
     if (progress === 30) {
-      scanStatusText.innerText = "Scanning cheeks & beautiful eyes...";
+      scanStatusText.innerText = "Scanning your kind heart & sweet energy...";
     } else if (progress === 60) {
-      scanStatusText.innerText = "Measuring smile cuteness ratio...";
+      scanStatusText.innerText = "Measuring your laughter, kindness & brightness...";
     } else if (progress === 90) {
-      scanStatusText.innerText = "Calculating total adorable score...";
+      scanStatusText.innerText = "Calculating total wonderful soul score...";
     } else if (progress >= 100) {
       clearInterval(interval);
       scanStatusText.innerText = "Access Granted! 💖";
