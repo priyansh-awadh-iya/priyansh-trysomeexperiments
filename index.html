@@ -1,96 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Good Night, Neha 🌙</title>
-    <!-- Modern Premium Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Good Night Lock for Neha 🌙💖</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Canvas for floating heart particles -->
-    <canvas id="particles-canvas"></canvas>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-pink-500 selection:text-white relative overflow-x-hidden">
 
-    <!-- Starfield container for dynamically generated stars -->
-    <div id="starfield"></div>
+  <!-- Background Starry Canvas -->
+  <canvas id="starCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
 
-    <!-- Parallax/Background elements -->
-    <div class="moon">
-        <div class="moon-glow"></div>
-    </div>
-    
-    <div class="ambient-fog"></div>
+  <!-- Ambient Glowing Blobs -->
+  <div class="fixed top-1/4 -left-32 w-80 h-80 bg-pink-600/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="fixed bottom-1/4 -right-32 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-    <!-- Main Interactive Area -->
-    <div class="app-container">
-        <!-- Soundbox Control -->
-        <button id="music-toggle" class="music-btn" aria-label="Toggle Music Box">
-            <span class="music-icon">🎵</span>
-            <span class="music-text">Lullaby Off</span>
+  <!-- Ambient Lullaby Music Toggle -->
+  <div class="fixed top-4 right-4 z-50 flex items-center gap-2">
+    <button id="musicToggleBtn" type="button" class="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white p-3 rounded-full shadow-lg transition-all transform hover:scale-105 flex items-center gap-2 text-sm font-medium">
+      <i id="musicIcon" class="fa-solid fa-music text-pink-400"></i>
+      <span id="musicText" class="hidden sm:inline">Play Ambient Lullaby</span>
+    </button>
+  </div>
+
+  <main class="relative z-10 min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+
+    <!-- CONTAINER 1: LOCKED GATEKEEPER VIEW -->
+    <div id="lockedSection" class="w-full max-w-md bg-slate-900/80 backdrop-blur-xl border border-pink-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pink-950/40 text-center transition-all duration-500 relative">
+      
+      <!-- Lock Header Badge -->
+      <div class="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-4">
+        <i class="fa-solid fa-lock text-pink-400"></i> Status: Locked
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-purple-300 mb-2">
+        Good Night Wish 🌙
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base mb-6 leading-relaxed">
+        Hey <span class="text-pink-300 font-semibold underline decoration-pink-500/50">Neha</span>! Your official Good Night wish is ready, but it is strictly protected under romantic law 🔒
+      </p>
+
+      <!-- Rule Box -->
+      <div class="bg-pink-950/40 border border-pink-500/20 rounded-2xl p-4 mb-6 text-left relative overflow-hidden">
+        <div class="absolute -right-4 -bottom-4 text-pink-500/10 text-6xl pointer-events-none">
+          <i class="fa-solid fa-shield-heart"></i>
+        </div>
+        <h3 class="text-pink-300 font-semibold text-sm flex items-center gap-2 mb-1">
+          <i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Verification Required:
+        </h3>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          You must send <strong>1 cute picture</strong> of yourself to unlock your personalized Good Night note & sweet dreams package!
+        </p>
+      </div>
+
+      <!-- Photo Upload & Capture Box -->
+      <div class="space-y-4 mb-6">
+        
+        <!-- Live Image Preview (Hidden initially) -->
+        <div id="imagePreviewContainer" class="hidden relative group rounded-2xl overflow-hidden border-2 border-pink-400/80 shadow-lg shadow-pink-500/20 max-h-64">
+          <img id="imagePreview" src="" alt="Neha's Photo" class="w-full h-64 object-cover">
+          <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-xs flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+            <button id="changePhotoBtn" type="button" class="bg-pink-600 text-white text-xs font-semibold px-4 py-2 rounded-full shadow hover:bg-pink-500 transition">
+              <i class="fa-solid fa-arrows-rotate mr-1"></i> Change Pic
+            </button>
+          </div>
+          <div class="absolute top-2 right-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow flex items-center gap-1">
+            <i class="fa-solid fa-check"></i> Cute Pic Ready
+          </div>
+        </div>
+
+        <!-- Drag and Drop / Upload Button Area -->
+        <div id="uploadBox" class="border-2 border-dashed border-pink-400/40 hover:border-pink-400 bg-pink-950/20 rounded-2xl p-6 transition-all duration-300 cursor-pointer flex flex-col items-center justify-center group">
+          <input type="file" id="fileInput" accept="image/*" class="hidden">
+          <div class="w-14 h-14 bg-pink-500/10 group-hover:bg-pink-500/20 text-pink-400 rounded-full flex items-center justify-center text-2xl mb-3 transition-transform group-hover:scale-110">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <p class="text-slate-200 text-sm font-medium mb-1">
+            Tap to upload cute photo
+          </p>
+          <p class="text-slate-400 text-xs">
+            PNG, JPG, WEBP or phone gallery
+          </p>
+        </div>
+
+        <div class="flex items-center my-3">
+          <div class="flex-grow border-t border-slate-800"></div>
+          <span class="px-3 text-xs text-slate-500 uppercase tracking-widest font-semibold">OR</span>
+          <div class="flex-grow border-t border-slate-800"></div>
+        </div>
+
+        <!-- Live Selfie Camera Option -->
+        <button id="openCameraBtn" type="button" class="w-full bg-slate-800 hover:bg-slate-700/80 border border-slate-700 text-pink-200 text-sm font-semibold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-camera text-pink-400"></i> Take Live Selfie Snapshot
         </button>
 
-        <!-- Dynamic Message Bubble (When clicking stars) -->
-        <div id="star-message" class="star-message-bubble">
-            Click on a glowing star to find a sweet thought...
-        </div>
+      </div>
 
-        <!-- The Interactive Envelope -->
-        <div class="envelope-wrapper">
-            <div class="envelope" id="envelope">
-                <div class="flap"></div>
-                <div class="pocket"></div>
-                <!-- The Letter inside the envelope -->
-                <div class="letter">
-                    <div class="letter-content">
-                        <h2 class="letter-title">Good Night, Neha ❤️</h2>
-                        <div class="letter-divider"></div>
-                        <p class="letter-body">
-                            As the night settles in and the world grows quiet, I find my thoughts drifting to you. You make every single day brighter, and tonight, I wanted to send a little piece of that warmth back to you.
-                        </p>
-                        <p class="letter-body">
-                            Thank you for being your wonderful, amazing self. May your sleep be peaceful and your dreams filled with happy thoughts. 
-                        </p>
-                        <p class="letter-signature">
-                            Always, <br>
-                            <span class="signature-name">Priyansh</span>
-                        </p>
-                    </div>
-                </div>
-                <!-- The interactive heart wax seal -->
-                <div class="seal" id="envelope-seal">
-                    <svg class="heart-svg" viewBox="0 0 32 32">
-                        <path d="M16,28.261c-0.342,0-0.676-0.125-0.938-0.352c-0.273-0.237-7.447-6.529-10.457-9.539C2.47,16.233,1,13.676,1,10.66 C1,5.334,5.334,1,10.66,1c3.016,0,5.573,1.47,7.34,3.605C19.767,2.47,22.324,1,25.34,1C30.666,1,35,5.334,35,10.66 c0,3.016-1.47,5.573-3.605,7.34c-3.01,3.01-10.184,9.302-10.457,9.539C20.676,28.136,20.342,28.261,16,28.261z"/>
-                    </svg>
-                    <span class="seal-prompt">Tap to Open</span>
-                </div>
-            </div>
+      <!-- Camera Modal (Hidden by default) -->
+      <div id="cameraModal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md flex flex-col items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-4 text-center">
+          <h3 class="text-slate-200 font-semibold text-lg mb-3">Snap a Cute Selfie 📸</h3>
+          <div class="relative rounded-2xl overflow-hidden bg-black aspect-3/4 mb-4">
+            <video id="webcam" autoplay playsinline class="w-full h-full object-cover transform -scale-x-100"></video>
+            <canvas id="photoCanvas" class="hidden"></canvas>
+          </div>
+          <div class="flex gap-3">
+            <button id="closeCameraBtn" type="button" class="flex-1 bg-slate-800 text-slate-300 text-sm font-semibold py-2.5 rounded-xl hover:bg-slate-700">
+              Cancel
+            </button>
+            <button id="captureBtn" type="button" class="flex-1 bg-pink-600 text-white text-sm font-semibold py-2.5 rounded-xl hover:bg-pink-500 shadow-lg shadow-pink-600/30">
+              <i class="fa-solid fa-camera mr-1"></i> Capture
+            </button>
+          </div>
         </div>
+      </div>
 
-        <!-- Make a Wish Panel -->
-        <div class="wish-panel">
-            <p>Make a wish on a shooting star...</p>
-            <div class="wish-input-container">
-                <input type="text" id="wish-input" placeholder="Type your wish here..." maxlength="50">
-                <button id="wish-btn">Send Wish ✨</button>
-            </div>
-        </div>
+      <!-- Unlock Action Button -->
+      <button id="unlockBtn" type="button" class="w-full bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-base py-4 rounded-2xl shadow-xl shadow-pink-600/30 transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2 group">
+        <span>Unlock Good Night Wish</span>
+        <i class="fa-solid fa-heart text-white group-hover:scale-125 transition-transform"></i>
+      </button>
+
+      <!-- Warning Toast/Popup container -->
+      <div id="warningPopup" class="hidden mt-4 bg-rose-500/20 border border-rose-500/50 text-rose-200 text-xs font-semibold px-4 py-3 rounded-xl animate-bounce flex items-center gap-2">
+        <i class="fa-solid fa-circle-exclamation text-rose-400 text-base"></i>
+        <span id="warningMessage">Hey! You haven't attached a cute picture yet! 😜</span>
+      </div>
+
     </div>
 
-    <!-- Sound Indicator (Popup modal for first sound activation instruction) -->
-    <div id="sound-modal" class="modal">
-        <div class="modal-content">
-            <h3>🎵 Play a Lullaby?</h3>
-            <p>Would you like to turn on a gentle music box lullaby while you read?</p>
-            <div class="modal-actions">
-                <button id="modal-yes" class="btn-modal btn-primary">Yes, please</button>
-                <button id="modal-no" class="btn-modal">No, thanks</button>
-            </div>
+
+    <!-- CONTAINER 2: CUTENESS SCANNER MODAL (Hidden initially) -->
+    <div id="scannerModal" class="hidden fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-lg flex items-center justify-center p-4">
+      <div class="bg-slate-900/90 border border-pink-500/40 rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center relative overflow-hidden shadow-2xl">
+        
+        <h3 class="text-xl font-bold text-pink-300 mb-4">Cuteness Scanner v3.0 🔬</h3>
+
+        <!-- Scanner Image Box with Animated Laser Bar -->
+        <div class="relative rounded-2xl overflow-hidden border-2 border-pink-500/50 mb-6 mx-auto w-48 h-48 shadow-lg">
+          <img id="scannerImg" src="" alt="Scanning" class="w-full h-full object-cover">
+          <!-- Laser Scan Line -->
+          <div class="laser-beam absolute inset-x-0 h-1 bg-pink-400 shadow-[0_0_15px_#f43f5e] z-10"></div>
+          <div class="absolute inset-0 bg-pink-500/10 pointer-events-none"></div>
         </div>
+
+        <div class="space-y-2 mb-6">
+          <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div id="scanProgressBar" class="h-full bg-gradient-to-r from-pink-500 to-purple-500 w-0 transition-all duration-300"></div>
+          </div>
+          <p id="scanStatusText" class="text-xs text-pink-300 font-mono tracking-wider">Initializing facial cuteness scan...</p>
+        </div>
+
+        <div id="scanResultBadge" class="hidden text-emerald-400 font-extrabold text-lg animate-pulse">
+          🎉 CUTENESS RATING: 10,000 / 10!
+        </div>
+
+      </div>
     </div>
 
-    <script src="app.js"></script>
+
+    <!-- CONTAINER 3: UNLOCKED ROMANTIC GOOD NIGHT REVEAL -->
+    <div id="unlockedSection" class="hidden w-full max-w-lg bg-slate-900/90 backdrop-blur-xl border border-pink-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pink-900/50 text-center transition-all duration-700 relative overflow-hidden my-8">
+      
+      <!-- Confetti / Heart Canvas -->
+      <canvas id="heartCanvas" class="absolute inset-0 pointer-events-none z-0"></canvas>
+
+      <div class="relative z-10">
+        
+        <!-- Header -->
+        <div class="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs uppercase tracking-widest font-semibold px-4 py-1.5 rounded-full mb-4">
+          <i class="fa-solid fa-lock-open text-emerald-400"></i> Verification Passed • Access Granted
+        </div>
+
+        <h1 class="font-serif text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-rose-200 to-purple-300 mb-2">
+          Good Night, Neha! 💖✨
+        </h1>
+        <p class="font-handwriting text-pink-300 text-lg sm:text-xl mb-6">
+          "The stars are shining, but none as bright as you..."
+        </p>
+
+        <!-- Polaroid Frame displaying her photo -->
+        <div class="polaroid-frame bg-white p-4 pb-6 rounded-lg shadow-2xl max-w-xs mx-auto mb-6 transform -rotate-2 hover:rotate-0 transition-transform duration-300 relative group">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-200/80 w-24 h-6 transform -rotate-1 shadow-sm pointer-events-none"></div>
+          <img id="unlockedUserPhoto" src="" alt="Cutest Neha" class="w-full h-64 object-cover rounded shadow-inner mb-3">
+          <p class="font-handwriting text-slate-800 text-xl font-bold tracking-wide">
+            Cutest Girl Alive 👑💕
+          </p>
+        </div>
+
+        <!-- Prominent WhatsApp Action Button -->
+        <div class="mb-8 space-y-3">
+          <button id="whatsappShareBtn" type="button" class="w-full bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-base py-3.5 px-6 rounded-2xl shadow-xl shadow-emerald-600/30 flex items-center justify-center gap-3 transition-all duration-300">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+            <span>Send Selfie to Him on WhatsApp 📲</span>
+          </button>
+          <p class="text-[11px] text-slate-400">
+            Tap to automatically open WhatsApp on your phone with this cute photo!
+          </p>
+        </div>
+
+        <!-- Romantic Good Night Letter -->
+        <div class="bg-gradient-to-b from-pink-950/40 to-purple-950/40 border border-pink-500/30 rounded-2xl p-6 text-left mb-8 space-y-4 leading-relaxed text-slate-200 text-sm sm:text-base relative shadow-inner">
+          <p class="font-semibold text-pink-300 text-lg">
+            Dearest Neha,
+          </p>
+          <p>
+            Thank you for making my whole world warmer and happier just by being in it. Looking at your cute photo right now makes me smile so much! 😊
+          </p>
+          <p>
+            As you wrap yourself in your cozy blanket tonight, I want you to remember how incredibly special, gorgeous, and loved you are. May your sleep be peaceful and your dreams full of sweet moments (and maybe a little bit of me! 😜).
+          </p>
+          <p class="text-right font-handwriting text-pink-300 text-xl font-bold pt-2">
+            Forever Yours ❤️
+          </p>
+        </div>
+
+        <!-- Interactive Love Notes Cards Section -->
+        <div class="mb-8">
+          <h3 class="text-slate-300 font-semibold text-sm mb-3 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-envelope-open-text text-pink-400"></i> Tap cards to reveal midnight love notes:
+          </h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <!-- Card 1 -->
+            <div class="love-card bg-slate-800/80 border border-pink-500/20 p-4 rounded-xl cursor-pointer hover:border-pink-400 transition text-center select-none" onclick="toggleCard(this)">
+              <div class="card-front font-bold text-pink-300 text-sm">
+                <i class="fa-solid fa-star text-amber-300 mb-1 block"></i> Secret Note #1
+              </div>
+              <div class="card-back hidden text-xs text-slate-200 font-medium">
+                "Your smile brightens even my darkest days! ✨"
+              </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="love-card bg-slate-800/80 border border-pink-500/20 p-4 rounded-xl cursor-pointer hover:border-pink-400 transition text-center select-none" onclick="toggleCard(this)">
+              <div class="card-front font-bold text-pink-300 text-sm">
+                <i class="fa-solid fa-heart text-rose-400 mb-1 block"></i> Secret Note #2
+              </div>
+              <div class="card-back hidden text-xs text-slate-200 font-medium">
+                "I fall in love with you a little more every day 💕"
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="love-card bg-slate-800/80 border border-pink-500/20 p-4 rounded-xl cursor-pointer hover:border-pink-400 transition text-center select-none" onclick="toggleCard(this)">
+              <div class="card-front font-bold text-pink-300 text-sm">
+                <i class="fa-solid fa-moon text-purple-300 mb-1 block"></i> Secret Note #3
+              </div>
+              <div class="card-back hidden text-xs text-slate-200 font-medium">
+                "Sending you a warm hug through the screen! 🫂"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Virtual Kiss Sender Counter -->
+        <div class="bg-pink-950/30 border border-pink-500/20 rounded-2xl p-5 mb-6 text-center">
+          <p class="text-xs uppercase text-pink-300 tracking-wider font-semibold mb-2">Good Night Kisses Sent</p>
+          <div class="text-3xl font-extrabold text-pink-400 mb-3" id="kissCounter">0</div>
+          <button id="sendKissBtn" type="button" class="bg-pink-600 hover:bg-pink-500 text-white font-bold px-6 py-2.5 rounded-full shadow-lg shadow-pink-600/40 transition active:scale-95 flex items-center justify-center gap-2 mx-auto text-sm">
+            <span>Send Good Night Kiss</span> 💋
+          </button>
+        </div>
+
+        <!-- Footer Wish -->
+        <p class="text-xs text-slate-400">
+          Sleep tight, sweet dreams, Neha! 🌙💤
+        </p>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Script -->
+  <script src="script.js"></script>
 </body>
 </html>
