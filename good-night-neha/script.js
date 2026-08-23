@@ -53,7 +53,7 @@ const whatsappShareBtn = document.getElementById('whatsappShareBtn');
 const warningList = [
   "Hold on Neha! 🛑 No cute picture, no Good Night wish! Upload a selfie first! 📸",
   "Nice try sneaky! 😜 System requires 1 cute photo to proceed!",
-  "Good Night wish is strictly locked! 🔒 Please attach a pic ❤️",
+  "Good Night wish from Priyansh is strictly locked! 🔒 Please attach a pic ❤️",
   "0% Cuteness detected in upload box! Send a pic to verify! 💕",
   "Come on Neha! Don't try to cheat the lock! 📸✨"
 ];
@@ -202,14 +202,12 @@ function unlockGoodNightView() {
 
   // Play subtle chime sound
   playChimeSound();
-
-  // Redirect / prompt WhatsApp share after short delay
-  setTimeout(() => {
-    redirectToWhatsApp();
-  }, 1000);
+  
+  // NOTE: No automatic WhatsApp redirect here! 
+  // Neha decides when to click the green button to send her selfie to Priyansh.
 }
 
-// --- 4. DIRECT WHATSAPP REDIRECTION ---
+// --- 4. MANUAL WHATSAPP REDIRECTION (TRIGGERED ONLY ON BUTTON CLICK) ---
 function redirectToWhatsApp() {
   // Mobile Web Share API to directly attach image file into WhatsApp if supported on phone
   if (navigator.share && selectedPhotoDataUrl) {
@@ -218,8 +216,8 @@ function redirectToWhatsApp() {
       .then(blob => {
         const file = new File([blob], 'neha_cute_selfie.jpg', { type: 'image/jpeg' });
         navigator.share({
-          title: 'Neha\'s Cute Selfie 📸',
-          text: 'Hey babe! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨',
+          title: 'Neha\'s Cute Selfie for Priyansh 📸',
+          text: 'Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨',
           files: [file]
         }).catch(() => {
           // Fallback to direct wa.me link if Web Share fails or is closed
@@ -234,7 +232,7 @@ function redirectToWhatsApp() {
 
 function openDirectWhatsAppLink() {
   const cleanPhone = targetPhone.replace(/[^0-9]/g, '');
-  const textMsg = encodeURIComponent("Hey babe! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨");
+  const textMsg = encodeURIComponent("Hey Priyansh! Here is my cute selfie for my Good Night wish! 📸💕\nCuteness Rating: 10,000/10! 👑✨");
   
   if (cleanPhone && cleanPhone !== "91XXXXXXXXXX") {
     // Uses whatsapp:// deep link or api.whatsapp.com to trigger WhatsApp app on phone
